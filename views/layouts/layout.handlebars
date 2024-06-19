@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     {{!-- TODO: Later on try to install a font and use it locally --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
     {{!-- Styles --}}
     <link rel="stylesheet" href="/css/app.css">
     
-    <title>{{title}}</title>
+    <title>devJobs | {{title}}</title>
 </head>
 <body>
     
@@ -20,7 +20,30 @@
         <h1>
             <a href="/">devJobs</a>
         </h1>
+        
+        {{#if bar}}
+            <div class="buscador">
+                <form action="#">
+                    <input type="text" class="buscar">
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
+        {{/if}}
     </div>
+    
+    <header class="site-header contenedor separador">
+        <h2>{{title}}</h2>
+        
+        {{#if tagline}}
+            <p class="tagline">{{tagline}}</p>
+        {{/if}}
+        
+        {{#if button}}
+            <a href="/job/create" class="btn btn-azul">
+                Create new position
+            </a>
+        {{/if}}
+    </header>
     
     <div class="contenido-principal contenedor">
         {{{body}}}
