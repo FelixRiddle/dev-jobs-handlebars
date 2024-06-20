@@ -9,7 +9,7 @@ const MongoStore = require("connect-mongo");
 
 const router = require('./routes/index');
 
-const { MONGODB_URI } = require('./config/db');
+const { MONGODB_URI } = require('./lib/config/db');
 
 require('dotenv').config({
     path: ".env",
@@ -22,6 +22,7 @@ const PORT = 3005;
 // Enable handlebars as template engine
 app.engine("handlebars", engine({
     defaultLayout: "layout",
+	helpers: require("./lib/helpers/handlebars"),
 }));
 app.set('view engine', 'handlebars');
 app.set('views', './views');

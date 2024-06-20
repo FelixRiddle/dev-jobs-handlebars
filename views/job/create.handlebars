@@ -57,5 +57,15 @@
 			/>
 			<trix-editor input="description"></trix-editor>
         </div>
+		
+		<h3>Knowledge</h3>
+		<ul class="lista-conocimientos">
+			{{#selectSkills a}}
+			{{/selectSkills}}
+		</ul>
+		
+		<div class="campo centrar-horizontal">
+			<input type="submit" value="Publish" class="btn btn-azul"/>
+		</div>
     </form>
 </main>

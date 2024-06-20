@@ -5,7 +5,7 @@ dotenv.config({
     path: ".env"
 });
 
-const jobSchema = require('../model/Job');
+const jobSchema = require('../../model/Job');
 
 const MONGODB_HOST = process.env.MONGODB_HOST || "localhost";
 const MONGODB_PORT = process.env.MONGODB_PORT || 27017;
