@@ -1,4 +1,14 @@
 <main class="contenedor">
+	{{!-- ~~~ Trix ~~~ --}}
+	<link rel="stylesheet" href="/package/trix@2.1.1/dist/trix.css">
+	
+	{{!-- Scripts --}}
+	{{!-- Too heavy 440kb, must be called only when required, if possible even gzip it --}}
+	<script
+		src="/package/trix@2.1.1/dist/trix.umd.js"
+	></script>
+	
+	{{!-- Formulary --}}
     <form action="/job/create" method="POST" class="default-form">
         <h3>
             General information
@@ -35,9 +45,17 @@
             </select>
         </div>
         
-        <div class="campo">
+		<h3>Job description</h3>
+        <div class="campo descripcion">
             <label for="description">Description</label>
-            <textarea name="description" id="description" cols="30" rows="10" placeholder="Description" required></textarea>
+			<input 
+				type="hidden"
+				name="description"
+				id="description"
+				placeholder="Description"
+				required
+			/>
+			<trix-editor input="description"></trix-editor>
         </div>
     </form>
 </main>

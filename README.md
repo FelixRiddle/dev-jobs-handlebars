@@ -2,6 +2,12 @@
 
 A job seeking / posting app like linkedin.
 
+# External packages
+
+Uses trix for creating job descriptions.
+
+The way to install external packages is build them and move their dist folder to 'public/package/PACKAGE_NAME/dist'
+
 # .env
 
 ```
