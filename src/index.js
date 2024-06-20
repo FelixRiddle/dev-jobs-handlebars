@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 const path = require('path');
 const session = require("express-session");
-
+const bodyParser = require('body-parser');
 const MongoStore = require("connect-mongo");
 
 const router = require('./routes/index');
@@ -18,6 +18,11 @@ require('dotenv').config({
 const app = express();
 
 const PORT = 3005;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true,
+}));
 
 // Enable handlebars as template engine
 app.engine("handlebars", engine({
