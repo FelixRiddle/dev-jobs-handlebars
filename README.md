@@ -10,6 +10,10 @@ The way to install external packages is build them and move their dist folder to
 
 # .env
 
+Required environment variables.
+
+<!-- Although they could be made automatically? -->
+
 ```
 MONGO_DATABASE_NAME=
 JWT_SECRET=

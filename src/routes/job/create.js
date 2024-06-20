@@ -12,6 +12,8 @@ createRouter.get("/create", (req, res) => {
 
 createRouter.post("/create", async (req, res) => {
     try {
+		console.log(`Body: `, req.body);
+		
 		const job = new Job(req.body);
 		
 		job.skills = req.body.skills.split(",");

@@ -15,6 +15,7 @@ function addSkill(e) {
 	}
 	
 	const skillsArray = [...skills];
+	document.querySelector("#skills").value = skillsArray;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
