@@ -25,6 +25,24 @@ jobRouter.get("/get_all", async (req, res) => {
 	}
 });
 
+jobRouter.get("/:id", async(req, res) => {
+	try {
+		const job = await Job.findById(req.params.id).lean();
+		
+		return res.send({
+			job,
+		});
+	} catch(err) {
+		console.error(err);
+        return res.status(500).send({
+            messages: [{
+                message: "Internal error",
+                error: true,
+            }],
+        });
+	}
+});
+
 jobRouter.get("/:url", async (req, res) => {
 	try {
 		const job = await Job.findOne({
