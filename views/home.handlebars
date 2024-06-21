@@ -1,12 +1,8 @@
 <main class="lista-vacantes">
     <h2>List of job postings</h2>
 	
-	{{!-- FIXME: This is not working on my browser, it doesn't show anything, I'm unable to find the problem. --}}
     {{!-- Job posts --}}
 	{{#each jobs}}
-		<h3>{{company}}</h3>
-		
-		{{!-- <p>Job company: {{this.company}}</p> --}}
 		{{#with this}}
 			<div class="vacante">
 				<div class="caja">
