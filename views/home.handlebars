@@ -1,67 +1,44 @@
 <main class="lista-vacantes">
     <h2>List of job postings</h2>
-    
-    {{!-- Facebook posting --}}
-    <div class="vacante">
-        <div class="caja">
-            <h3>Facebook</h3>
-            <p class="puesto">React developer</p>
-        </div>
-        
-        <div class="caja">
-            <p class="etiqueta">
-                Location
-            </p>
-            <p class="nombre">
-                Remote
-            </p>
-        </div>
-        
-        <div class="caja">
-            <p class="etiqueta">
-                Contract
-            </p>
-            <p class="nombre contrato">
-                Full-time
-            </p>
-        </div>
-        
-        <div class="caja centrar-vertical">
-            <a href="#" class="btn btn-verde">
-                More information
-            </a>
-        </div>
-    </div>
-    
-    {{!-- AirBNB --}}
-    <div class="vacante">
-        <div class="caja">
-            <h3>AirBNB</h3>
-            <p class="puesto">React developer</p>
-        </div>
-        
-        <div class="caja">
-            <p class="etiqueta">
-                Location
-            </p>
-            <p class="nombre">
-                Remote
-            </p>
-        </div>
-        
-        <div class="caja">
-            <p class="etiqueta">
-                Contract
-            </p>
-            <p class="nombre contrato">
-                Full-time
-            </p>
-        </div>
-        
-        <div class="caja centrar-vertical">
-            <a href="#" class="btn btn-verde">
-                More information
-            </a>
-        </div>
-    </div>
+	
+    {{!-- Job posts --}}
+	{{#each jobs}}
+		<h3>{{company}}</h3>
+		
+		{{!-- <p>Job company: {{this.company}}</p> --}}
+		{{#with this}}
+			<div class="vacante">
+				<div class="caja">
+					<h3>{{company}}</h3>
+					<p class="puesto">{{title}}</p>
+				</div>
+				
+				<div class="caja">
+					<p class="etiqueta">
+						Location
+					</p>
+					<p class="nombre">
+						{{location}}
+					</p>
+				</div>
+				
+				<div class="caja">
+					<p class="etiqueta">
+						Contract
+					</p>
+					<p class="nombre contrato">
+						{{contract}}
+					</p>
+				</div>
+				
+				<div class="caja centrar-vertical">
+					<a href="/jobs/{{url}}" class="btn btn-verde">
+						More information
+					</a>
+				</div>
+			</div>
+		{{/with}}
+	{{else}}
+		<p>There are no job posts!</p>
+	{{/each}}
 </main>
