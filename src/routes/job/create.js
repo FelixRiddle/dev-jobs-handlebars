@@ -3,17 +3,15 @@ const Job = require("../../model/Job");
 
 const createRouter = express.Router();
 
-createRouter.get("/create", (req, res) => {
+createRouter.get("/", (req, res) => {
     return res.render("job/create", {
         title: "Create a job",
         tagline: "Fill the formulary and create a new job",
     });
 });
 
-createRouter.post("/create", async (req, res) => {
+createRouter.post("/", async (req, res) => {
     try {
-		console.log(`Body: `, req.body);
-		
 		const job = new Job(req.body);
 		
 		job.skills = req.body.skills.split(",");

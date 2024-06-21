@@ -1,6 +1,7 @@
 <main class="lista-vacantes">
     <h2>List of job postings</h2>
 	
+	{{!-- FIXME: This is not working on my browser, it doesn't show anything, I'm unable to find the problem. --}}
     {{!-- Job posts --}}
 	{{#each jobs}}
 		<h3>{{company}}</h3>
@@ -32,7 +33,7 @@
 				</div>
 				
 				<div class="caja centrar-vertical">
-					<a href="/jobs/{{url}}" class="btn btn-verde">
+					<a href="/job/{{url}}" class="btn btn-verde">
 						More information
 					</a>
 				</div>

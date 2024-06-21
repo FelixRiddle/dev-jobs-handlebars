@@ -5,7 +5,7 @@ const createRouter = require("./create");
 
 const jobRouter = express.Router();
 
-jobRouter.use(createRouter);
+jobRouter.use("/create", createRouter);
 
 jobRouter.get("/get_all", async (req, res) => {
 	try {
@@ -14,6 +14,32 @@ jobRouter.get("/get_all", async (req, res) => {
 		return res.send({
             jobs,
         });
+	} catch(err) {
+		console.error(err);
+		return res.status(500).send({
+			messages: [{
+                message: "Internal error",
+                error: true,
+            }],
+		});
+	}
+});
+
+jobRouter.get("/:url", async (req, res) => {
+	try {
+		const job = await Job.findOne({
+			url: req.params.url
+		}).lean();
+		
+		// Debugging 101
+		// The problem was mongoose, the '.lean' fixed it.
+		const responseObject = {
+			job,
+			title: job.title,
+			bar: true,
+		};
+		
+		return res.render("job/job", responseObject);
 	} catch(err) {
 		console.error(err);
 		return res.status(500).send({

@@ -4,7 +4,7 @@ const Job = require("../model/Job");
 const homeRouter = express.Router();
 
 homeRouter.get("/", async (req, res, next) => {
-	const jobs = await Job.find();
+	const jobs = await Job.find().lean();
 	
 	if(!jobs) {
 		return next();

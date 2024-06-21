@@ -24,16 +24,10 @@ app.use(bodyParser.urlencoded({
 	extended: true,
 }));
 
-// Enable handlebars as template engine
-app.engine("handlebars", engine({
-    defaultLayout: "layout",
-	helpers: require("./lib/helpers/handlebars"),
-}));
-app.set('view engine', 'handlebars');
-app.set('views', './views');
+// Public folder
 app.use(express.static(path.join(process.cwd(), "public")));
 
-console.log(`Mongodb uri: `, MONGODB_URI);
+// Useful middlewares
 app.use(cookieParser());
 app.use(session({
     secret: process.env.SECRET_TOKEN,
@@ -45,6 +39,15 @@ app.use(session({
     })
 }));
 
+// Enable handlebars as template engine
+app.engine("handlebars", engine({
+    defaultLayout: "layout",
+	helpers: require("./lib/helpers/handlebars"),
+}));
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
+// Routes
 app.use("/", router);
 
 app.listen(PORT, () => {
