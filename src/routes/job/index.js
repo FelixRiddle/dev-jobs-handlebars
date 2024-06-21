@@ -25,7 +25,7 @@ jobRouter.get("/get_all", async (req, res) => {
 	}
 });
 
-jobRouter.get("/:id", async(req, res) => {
+jobRouter.get("/get/:id", async(req, res) => {
 	try {
 		const job = await Job.findById(req.params.id).lean();
 		
