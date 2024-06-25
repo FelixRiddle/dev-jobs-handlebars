@@ -15,8 +15,10 @@ editRouter.get("/:url", async(req, res, next) => {
 		}
 		
 		const responseObject = {
+			title: job.title,
+			tagline: job.company,
+			bar: true,
 			job,
-			title: `Edit | ${job.title}`,
 		};
 		
 		return res.render("job/edit", responseObject);
