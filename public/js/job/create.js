@@ -23,5 +23,23 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	if(skillElements) {
 		skillElements.addEventListener("click", addSkill);
+		
+		// Once we are editing, call the function
+		selectSkills();
 	}
 });
+
+/**
+ * Select skills
+ */
+function selectSkills() {
+	const selected = Array.from(document.querySelectorAll(".lista-conocimientos .activo"));
+	
+	const selectedSkills = selected.forEach(skill => skill.textContent);
+	
+	selectedSkills.forEach(select => {
+		skills.add(select);
+	});
+	
+	document.querySelector("#skills").value = selectedSkills;
+}
