@@ -9,10 +9,14 @@ function selectSkills(selected = [], options) {
 		...frameworks
 	];
 	
+	console.log(`Selected skills: `, selected);
+	
 	let html = "";
 	
 	skills.forEach(skill => {
-        html += `<li>${skill}</li>`;
+		const activeClass = selected.includes(skill) ? "activo" : "";
+		
+        html += `<li class="${activeClass}">${skill}</li>`;
     });
 	
 	try {
