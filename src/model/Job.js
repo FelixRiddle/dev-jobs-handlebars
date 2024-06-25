@@ -45,7 +45,7 @@ const jobSchema = new mongoose.Schema({
 jobSchema.pre('save', function(next) {
 	const url = slug(this.title);
 	this.url = `${url}-${shortid.generate()}`;
-
+	
 	next();
 });
 
