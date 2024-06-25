@@ -8,10 +8,11 @@
 		src="/package/trix@2.1.1/dist/trix.umd.js"
 	></script>
 	
-	<script src="/js/job/create.js"></script>
-	
 	{{!-- Formulary --}}
 	{{#with job}}
+		{{!-- Hidden input to get the value of the contract --}}
+		<input type="text" id="previousContract" value="{{contract}}" hidden />
+		
 		<form action="/job/edit" method="POST" class="default-form">
 			<h3>
 				General information
@@ -39,12 +40,12 @@
 			
 			<div class="campo">
 				<label for="contract">Contract</label>
-				<select name="contract" id="contract">
-					<option value="" disabled selected>- Select one -</option>
+				<select name="contract" id="contract" value="{{contract}}">
+					<option value="" disabled>- Select one -</option>
 					<option value="full-time">Full-time</option>
 					<option value="part-time">Part-time</option>
 					<option value="freelance">Freelance</option>
-					<option value="temporal">Temporal</option>
+					<option value="temporary">Temporary</option>
 				</select>
 			</div>
 			
@@ -74,4 +75,7 @@
 			</div>
 		</form>
 	{{/with}}
+	
+	{{!-- Site script always at the end --}}
+	<script src="/js/job/edit.js"></script>
 </main>

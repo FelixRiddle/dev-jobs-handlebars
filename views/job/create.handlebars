@@ -8,8 +8,6 @@
 		src="/package/trix@2.1.1/dist/trix.umd.js"
 	></script>
 	
-	<script src="/js/job/create.js"></script>
-	
 	{{!-- Formulary --}}
     <form action="/job/create" method="POST" class="default-form">
         <h3>
@@ -39,11 +37,11 @@
         <div class="campo">
             <label for="contract">Contract</label>
             <select name="contract" id="contract">
-                <option value="" disabled selected>- Select one -</option>
-                <option value="full-time">Full-time</option>
-                <option value="part-time">Part-time</option>
-                <option value="freelance">Freelance</option>
-                <option value="temporal">Temporal</option>
+				<option value="" disabled selected>- Select one -</option>
+				<option value="full-time">Full-time</option>
+				<option value="part-time">Part-time</option>
+				<option value="freelance">Freelance</option>
+				<option value="temporary">Temporary</option>
             </select>
         </div>
         
@@ -68,7 +66,9 @@
 		
 		<div class="campo centrar-horizontal">
 			<input type="hidden" name="skills" id="skills">
-			<input type="submit" value="Publish" class="btn btn-azul"/>
+			<input type="submit" value="Save changes" class="btn btn-azul"/>
 		</div>
     </form>
+	
+	<script src="/js/job/create.js"></script>
 </main>

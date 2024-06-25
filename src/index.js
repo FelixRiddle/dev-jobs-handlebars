@@ -7,8 +7,8 @@ const session = require("express-session");
 const bodyParser = require('body-parser');
 const MongoStore = require("connect-mongo");
 
+const helpers = require("./lib/helpers/handlebars");
 const router = require('./routes/index');
-
 const { MONGODB_URI } = require('./lib/config/db');
 
 require('dotenv').config({
@@ -42,7 +42,7 @@ app.use(session({
 // Enable handlebars as template engine
 app.engine("handlebars", engine({
     defaultLayout: "layout",
-	helpers: require("./lib/helpers/handlebars"),
+	helpers,
 }));
 app.set('view engine', 'handlebars');
 app.set('views', './views');

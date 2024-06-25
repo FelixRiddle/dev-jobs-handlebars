@@ -49,4 +49,14 @@ jobSchema.pre('save', function(next) {
 	next();
 });
 
+exports.contractTypes = [
+	"full-time",
+	"part-time",
+	"freelance",
+	"contract",
+    "temporary",
+    "internship",
+    "apprenticeship",
+    "volunteer",
+];
 module.exports = mongoose.model("job", jobSchema);
