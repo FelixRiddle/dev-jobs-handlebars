@@ -32,11 +32,16 @@ jobRouter.get("/get_all", async (req, res) => {
 // --- Renders ---
 jobRouter.get("/:url", async (req, res) => {
 	try {
+		console.log(`[GET] /job/${req.params.url}`);
 		const job = await Job.findOne({
 			url: req.params.url
 		}).lean();
 		
 		console.log(`Job: `, job);
+		
+		if(!job) {
+			return res.status(404).redirect("/404");
+		}
 		
 		// Debugging 101
 		// The problem was mongoose, the '.lean' fixed it.
