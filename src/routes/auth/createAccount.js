@@ -43,15 +43,19 @@ createAccount.post(
 			console.log(`[POST] /auth/create-account`);
 			const result = validationResult(req);
 			if (!result.isEmpty()) {
-				console.error(result);
+				const messages = result.array().map((error) => {
+					return {
+						message: error.msg,
+						error: true,
+					};
+				});
 				
-				req.flash('error', result.array().map(error => error.msg));
+				req.flash('messages', messages);
 				
 				return res.status(400).send({
-					messages: [{
-						message: "Didn't pass validation",
-						error: true,
-					}]
+					messages: [
+						...req.flash().messages
+					],
 				});
 			}
 			
