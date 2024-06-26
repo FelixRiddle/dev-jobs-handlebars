@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../../model/User");
 const { body, validationResult } = require("express-validator");
+const getUrl = require("../../lib/config/url");
 
 const createAccount = express.Router();
 
@@ -35,12 +36,22 @@ createAccount.post(
     body("password", "Password is required").escape().notEmpty(),
 	body("password", "The password is not strong").isStrongPassword(),
 	// I think confirm password is just a frontend thing
-	// They have to be checked so we don't use is strong password here
     body("confirmPassword", "Confirm password is required").escape().notEmpty(),
-	body("confirmPassword", "The passwords don't match").equals(body("password")),
-	function createAccount(req, res, next) {
+	async function createAccount(req, res, next) {
 		try {
 			console.log(`[POST] /auth/create-account`);
+			
+			// Validate password here because I don't know how to with express validator
+			if(req.body.password !== req.body.confirmPassword) {
+				return res.status(400).send({
+					messages: [{
+                        message: "Passwords don't match",
+                        error: true,
+                    }],
+				});
+			}
+			
+			// Validate data
 			const result = validationResult(req);
 			if (!result.isEmpty()) {
 				const messages = result.array().map((error) => {
@@ -59,15 +70,17 @@ createAccount.post(
 				});
 			}
 			
+			// Create user
 			const user = new User(req.body);
-			
-			const newUser = user.save();
-			if(!newUser) {
+			try {
+				await user.save();
+			} catch(err) {
+				req.flash("messages", [{
+					message: "The given E-Mail is taken",
+					error: true,
+				}]);
 				return res.status(400).send({
-					messages: [{
-						message: "The user couldn't be created",
-						error: true,
-					}],
+					messages: [...req.flash().messages],
 				});
 			}
 			
@@ -103,12 +116,24 @@ createAccount.post(
     body("password", "Password is required").escape().notEmpty(),
 	body("password", "The password is not strong").isStrongPassword(),
 	// I think confirm password is just a frontend thing
-	// They have to be checked so we don't use is strong password here
     body("confirmPassword", "Confirm password is required").escape().notEmpty(),
-	body("confirmPassword", "The passwords don't match").equals(body("password")),
-	function createAccount(req, res, next) {
+	async function createAccount(req, res, next) {
+		const url = getUrl();
 		try {
 			console.log(`[POST] /auth/create-account/redirect`);
+			
+			// Validate password here because I don't know how to with express validator
+			if(req.body.password !== req.body.confirmPassword) {
+				req.flash("messages", [{
+					message: "Passwords don't match",
+					error: true,
+				}]);
+				return res.render(`auth/create-account`, {
+					...createAccountMetadata,
+					messages: [...req.flash().messages],
+				});
+			}
+			
 			const result = validationResult(req);
 			if (!result.isEmpty()) {
 				const messages = result.array().map((error) => {
@@ -120,7 +145,7 @@ createAccount.post(
 				
 				req.flash('messages', messages);
 				
-				return res.render("auth/create-account", {
+				return res.render(`auth/create-account`, {
 					...createAccountMetadata,
 					messages: [
 						...req.flash().messages
@@ -128,18 +153,25 @@ createAccount.post(
 				});
 			}
 			
+			// Create user
 			const user = new User(req.body);
-			
-			const newUser = user.save();
-			if(!newUser) {
-				// Does this redirects to 404?
-				return next();
+			try {
+				await user.save();
+			} catch(err) {
+				req.flash("messages", [{
+					message: "The given E-Mail is taken",
+					error: true,
+				}]);
+				return res.render(`auth/create-account`, {
+					...createAccountMetadata,
+					messages: [...req.flash().messages],
+				});
 			}
 			
-			return res.redirect("auth/login")
+			return res.redirect(`${url}auth/login`);
 		} catch(err) {
 			console.error(err);
-			return res.redirect("500");
+			return res.redirect(`${url}/500`);
 		}
 	}
 );

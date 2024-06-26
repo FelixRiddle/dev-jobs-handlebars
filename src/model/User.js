@@ -40,5 +40,17 @@ userSchema.pre("save", function(next) {
     });
 });
 
+userSchema.post("save", function(err, doc, next) {
+	try {
+		if(err.name === "MongoError" && err.code === 11000) {
+			return next("The given E-Mail is taken");
+		}
+		
+		return next(err);
+	} catch(error) {
+		return next(err);
+	}
+});
+
 const User = mongoose.model("User", userSchema);
 module.exports = User;
