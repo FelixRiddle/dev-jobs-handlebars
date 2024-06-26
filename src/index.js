@@ -6,6 +6,7 @@ const path = require('path');
 const session = require("express-session");
 const bodyParser = require('body-parser');
 const MongoStore = require("connect-mongo");
+const flash = require("connect-flash");
 
 const helpers = require("./lib/helpers/handlebars");
 const router = require('./routes/index');
@@ -45,6 +46,14 @@ app.engine("handlebars", engine({
 }));
 app.set('view engine', 'handlebars');
 app.set('views', './views');
+
+// Alerts and flash messages
+app.use(flash());
+
+app.use((req, res, next) => {
+	res.locals.messages = req.flash();
+	next();
+});
 
 // Routes
 app.use("/", router);
