@@ -107,16 +107,20 @@ createAccount.post(
 			console.log(`[POST] /auth/create-account/redirect`);
 			const result = validationResult(req);
 			if (!result.isEmpty()) {
-				req.flash('error', result.array().map(error => error.msg));
-				
-				return res.status(400).send({
-					// This will be it for this project
-					userMessages: req.flash(),
-					// This was my way of doing debug messages
-					messages: [{
-						message: "Didn't pass validation",
+				const messages = result.array().map((error) => {
+					return {
+						message: error.msg,
 						error: true,
-					}]
+					};
+				});
+				
+				req.flash('messages', messages);
+				
+				return res.render("auth/create-account", {
+					...createAccountMetadata,
+					messages: [
+						...req.flash().messages
+					],
 				});
 			}
 			

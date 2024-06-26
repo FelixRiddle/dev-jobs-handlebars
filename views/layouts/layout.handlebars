@@ -46,6 +46,14 @@
     </header>
     
     <div class="contenido-principal contenedor">
+		{{#if messages}}
+			<div class="alertas">
+				{{#showUserMessages messages}}
+					
+				{{/showUserMessages}}
+			</div>
+		{{/if}}
+		
         {{{body}}}
     </div>
 	

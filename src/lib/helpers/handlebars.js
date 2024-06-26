@@ -64,8 +64,27 @@ function handleSelectContractType(selected, options) {
 	console.log(`Contract element: `, contractElement);
 }
 
+/**
+ * Show user messages
+ */
+function showUserMessages(messages = {}, alerts) {
+	console.log(`Received messages in the frontend: `, messages);
+	
+	let html = "";
+	if(messages.length > 0) {
+		messages.forEach(message => {
+			html += `<div class="error alerta">${message.message}</div>`;
+		});
+	}
+	
+    try {
+        return alerts.fn().html = html;
+    } catch(err) {}
+}
+
 module.exports = {
 	selectSkills,
 	contractType,
 	handleSelectContractType,
+	showUserMessages
 };
