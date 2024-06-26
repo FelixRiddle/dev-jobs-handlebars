@@ -1,6 +1,5 @@
 const express = require("express");
 const Job = require('../../model/Job');
-const { Types: MongooseTypes } = require("mongoose");
 
 const editRouter = express.Router();
 
@@ -39,7 +38,7 @@ editRouter.post("/:url", async(req, res, next) => {
 		
 		updatedJob.skills = req.body.skills.split(",");
 		
-		const job = await Job.findOneAndUpdate({
+		await Job.findOneAndUpdate({
             url: req.params.url
         }, updatedJob, {
             new: true,

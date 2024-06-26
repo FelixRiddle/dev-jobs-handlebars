@@ -10,14 +10,13 @@ const MongoStore = require("connect-mongo");
 const helpers = require("./lib/helpers/handlebars");
 const router = require('./routes/index');
 const { MONGODB_URI } = require('./lib/config/db');
+const { PORT } = require("./lib/config/env");
 
 require('dotenv').config({
     path: ".env",
 });
 
 const app = express();
-
-const PORT = 3005;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -53,5 +52,3 @@ app.use("/", router);
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
 });
-
-exports.PORT = PORT;

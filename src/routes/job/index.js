@@ -4,6 +4,7 @@ const Job = require('../../model/Job');
 const createRouter = require("./create");
 const getRouter = require("./get");
 const editRouter = require("./edit");
+const getUrl = require("../../lib/config/url");
 
 const jobRouter = express.Router();
 
@@ -29,7 +30,47 @@ jobRouter.get("/get_all", async (req, res) => {
 	}
 });
 
+/**
+ * This is the same as the previous endpooint
+ * 
+ * The problem is taht I can't use redirection with post requests because I'm making these to also be
+ * a REST API.
+ * 
+ * So this one uses redirect and should only be called with handlebars frontend.
+ */
+jobRouter.post("/edit_alt/redirect/:url", async(req, res, next) => {
+	const url = getUrl();
+	try {
+		const paramsUrl = req.params.url;
+		const updatedJob = req.body;
+		
+		console.log(`[POST] /job/edit_alt/redirect/${paramsUrl}`);
+		
+		updatedJob.skills = req.body.skills.split(",");
+		
+		await Job.findOneAndUpdate({
+            url: paramsUrl
+        }, updatedJob, {
+            new: true,
+			runValidators: true,
+        }).lean();
+		
+		const newUrl = `${url}`;
+		console.log(`Redirect to: `, newUrl);
+		
+		return res.redirect(newUrl);
+	} catch(err) {
+		console.error(err);
+		return res.redirect(`${url}/500`);
+	}
+});
+
 // --- Renders ---
+/**
+ * FIXME: This is wrong, if a job has the same name as an endpoint, it will be re-routered to the endpoint.
+ * 
+ * Use something like /show/:url or /view
+ */
 jobRouter.get("/:url", async (req, res) => {
 	try {
 		console.log(`[GET] /job/${req.params.url}`);

@@ -52,7 +52,7 @@ class SkillSelector {
 			return;
 		}
 		
-		const selectedSkills = selected.forEach(skill => skill.textContent);
+		const selectedSkills = selected.map(skill => skill.textContent);
 		
 		selectedSkills.forEach(select => {
 			this.skills.add(select);
