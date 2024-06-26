@@ -10,18 +10,12 @@ module.exports = {
 	devtool: "source-map",
 	mode: "development",
 	entry: {
-		// auth: {
-		// 	import: [
-		// 		`${publicRoutes}auth/register.js`
-		// 	],
-		// 	filename: "js/routes/auth/register.js"
-		// },
-        // config_default_property_images_config: {
-        //     import: [
-        //         `${jsPath}config/propertyImagesConfig.js`
-        //     ],
-        //     filename: "js/config/propertyImagesConfig.js"
-        // },
+		auth_create_account: {
+			import: [
+				`${publicRoutes}auth/create_account.js`
+			],
+			filename: "js/routes/auth/create_account.js"
+		},
 		job_create: {
 			import: [
 				`${publicRoutes}job/create.js`
@@ -33,7 +27,7 @@ module.exports = {
                 `${publicRoutes}job/edit.js`
             ],
             filename: "js/routes/job/edit.js"
-		}
+		},
 	},
     module: {
         rules: [

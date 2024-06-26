@@ -68,8 +68,6 @@ function handleSelectContractType(selected, options) {
  * Show user messages
  */
 function showUserMessages(messages = {}, alerts) {
-	console.log(`Received messages in the frontend: `, messages);
-	
 	let html = "";
 	if(messages.length > 0) {
 		messages.forEach(message => {
