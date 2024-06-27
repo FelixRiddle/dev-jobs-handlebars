@@ -4,11 +4,12 @@ const Job = require('../../model/Job');
 const createRouter = require("./create");
 const editRouter = require("./edit");
 const getUrl = require("../../lib/config/url");
+const { validateUserFrontend } = require("../../middleware/validateUser");
 
 const jobRouter = express.Router();
 
-jobRouter.use("/create", createRouter);
-jobRouter.use("/edit", editRouter);
+jobRouter.use("/create", validateUserFrontend, createRouter);
+jobRouter.use("/edit", validateUserFrontend, editRouter);
 
 /**
  * This is the same as the previous endpooint
@@ -18,7 +19,7 @@ jobRouter.use("/edit", editRouter);
  * 
  * So this one uses redirect and should only be called with handlebars frontend.
  */
-jobRouter.post("/edit_alt/redirect/:url", async(req, res, next) => {
+jobRouter.post("/edit_alt/redirect/:url", validateUserFrontend, async(req, res, next) => {
 	const url = getUrl();
 	try {
 		const paramsUrl = req.params.url;

@@ -11,6 +11,7 @@ const router = express.Router();
 
 router.use(homeRouter);
 router.use("/rest", restRouter);
+// Any user route requires authentication
 router.use("/user", validateUserFrontend, userRouter);
 router.use("/auth", authRouter);
 router.use('/job', jobRouter);
