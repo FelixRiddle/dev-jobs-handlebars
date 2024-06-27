@@ -2,7 +2,6 @@ const express = require("express");
 
 const Job = require('../../model/Job');
 const createRouter = require("./create");
-const getRouter = require("./get");
 const editRouter = require("./edit");
 const getUrl = require("../../lib/config/url");
 
@@ -10,25 +9,6 @@ const jobRouter = express.Router();
 
 jobRouter.use("/create", createRouter);
 jobRouter.use("/edit", editRouter);
-jobRouter.use("/get", getRouter);
-
-jobRouter.get("/get_all", async (req, res) => {
-	try {
-		const jobs = await Job.find();
-		
-		return res.send({
-            jobs,
-        });
-	} catch(err) {
-		console.error(err);
-		return res.status(500).send({
-			messages: [{
-                message: "Internal error",
-                error: true,
-            }],
-		});
-	}
-});
 
 /**
  * This is the same as the previous endpooint
@@ -96,12 +76,7 @@ jobRouter.get("/:url", async (req, res) => {
 		return res.render("job/job", responseObject);
 	} catch(err) {
 		console.error(err);
-		return res.status(500).send({
-			messages: [{
-                message: "Internal error",
-                error: true,
-            }],
-		});
+		return res.send("500");
 	}
 });
 

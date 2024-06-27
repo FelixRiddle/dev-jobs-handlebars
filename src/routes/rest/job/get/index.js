@@ -1,7 +1,7 @@
 const express = require("express");
 const { Types: MongooseTypes } = require("mongoose");
 
-const Job = require('../../../model/Job');
+const Job = require('../../../../model/Job');
 
 const ObjectId = MongooseTypes.ObjectId;
 
@@ -11,7 +11,7 @@ getRouter.get("/:id", async(req, res) => {
 	try {
 		const { id } = req.params;
 		
-		console.log(`[GET] /job/get/${id}`);
+		console.log(`[GET] /rest/job/get/${id}`);
 		
 		const objectId = new ObjectId(id);
 		
@@ -37,7 +37,7 @@ getRouter.get("/url/:url", async(req, res) => {
 	try {
 		const { url } = req.params;
 		
-		console.log(`[GET] /job/get/url/${url}`);
+		console.log(`[GET] /rest/job/get/url/${url}`);
 		
 		const job = await Job.findOne({
 			url

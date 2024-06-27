@@ -21,13 +21,7 @@ createRouter.post("/", async (req, res) => {
 		return res.redirect(`/job/${job.url}`);
 	} catch(err) {
 		console.error(err);
-		return res.status(500).send({
-			messages: [{
-                message: "Couldn't create the job, unkown error",
-                error: true,
-            }],
-            jobCreated: false,
-		});
+		return res.redirect("/500");
 	}
 });
 
