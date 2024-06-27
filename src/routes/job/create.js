@@ -14,6 +14,8 @@ createRouter.post("/", async (req, res) => {
     try {
 		const job = new Job(req.body);
 		
+		job.author = req.user._id;
+		
 		job.skills = req.body.skills.split(",");
 		
 		const newJob = await job.save();

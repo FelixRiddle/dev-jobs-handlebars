@@ -39,7 +39,12 @@ const jobSchema = new mongoose.Schema({
         name: String,
         email: String,
         cv: String,
-    }]
+    }],
+	author: {
+		type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+		required: "Author is required"
+	}
 });
 
 jobSchema.pre('save', function(next) {
