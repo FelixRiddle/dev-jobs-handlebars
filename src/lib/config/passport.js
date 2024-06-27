@@ -12,12 +12,18 @@ passport.use(new LocalStrategy({
         const user = await User.findOne({ email });
         if(!user) {
             return done(null, false, {
-                message: "Incorrect email or password",
+				messages: [{
+					message: "Incorrect email or password",
+					error: true,
+				}]
             });
         }
         if(!user.validatePassword(password)) {
             return done(null, false, {
-                message: "Incorrect email or password",
+				messages: [{
+					message: "Incorrect email or password",
+					error: true,
+				}]
             });
         }
         return done(null, user);
