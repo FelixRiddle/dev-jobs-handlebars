@@ -1,0 +1,22 @@
+<main class="contenedor">
+	{{#with user}}
+		<form action="/user/profile/edit" method="POST" class="default-form">
+			<div class="campo">
+				<label for="name">Nombre</label>
+				<input type="text" name="name" id="name" placeholder="Name" value="{{name}}" required />
+			</div>
+			<div class="campo">
+				<label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="E-Mail" value="{{email}}" required />
+			</div>
+			<div class="campo">
+				<label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" required />
+			</div>
+			
+			<div class="campo">
+				<input type="submit" value="Update" class="btn btn-azul" />
+			</div>
+		</form>
+	{{/with}}
+</main>
