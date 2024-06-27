@@ -12,6 +12,7 @@ const helpers = require("./lib/helpers/handlebars");
 const router = require('./routes/index');
 const { MONGODB_URI } = require('./lib/config/db');
 const { PORT } = require("./lib/config/env");
+const passport = require("./lib/config/passport");
 
 require('dotenv').config({
     path: ".env",
@@ -39,6 +40,13 @@ app.use(session({
     })
 }));
 
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Alerts and flash messages
+app.use(flash());
+
 // Enable handlebars as template engine
 app.engine("handlebars", engine({
     defaultLayout: "layout",
@@ -46,9 +54,6 @@ app.engine("handlebars", engine({
 }));
 app.set('view engine', 'handlebars');
 app.set('views', './views');
-
-// Alerts and flash messages
-app.use(flash());
 
 app.use((req, res, next) => {
 	res.locals.messages = req.flash();
