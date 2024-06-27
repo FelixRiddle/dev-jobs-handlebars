@@ -4,4 +4,41 @@
 		<a href="/user/profile/edit" class="btn btn-azul">Edit profile</a>
 		<a href="/job/create" class="btn btn-verde">Create a job</a>
 	</div>
+	
+	<h2>Your job posts</h2>
+	
+	{{#if jobs}}
+		{{#each jobs}}
+		
+			<div class="vacante panel-administracion">
+				
+				{{!-- <pre>
+					{{!-- JSON.stringify(messages, undefined, 2) --}}
+					{{stringified}}
+				</pre> --}}
+				
+				<div class="caja">
+					<h3>
+						{{company}}
+					</h3>
+					<p class="puesto">
+						{{title}}
+					</p>
+				</div>
+				<div class="centrar-vertical caja">
+					<a href="/candidates/{{_id}}" class="btn btn-amarillo">Candidates</a>
+				</div>
+				<div class="centrar-vertical caja">
+					{{!-- Url should've been first? --}}
+					{{!-- <a href="/job/{{url}}/edit" class="btn btn-verde">Edit</a> --}}
+					<a href="/job/edit/{{url}}" class="btn btn-verde">Edit</a>
+				</div>
+				<div class="centrar-vertical caja">
+					<a href="#" data-delete="{{_id}}" class="btn btn-rojo">Delete</a>
+				</div>
+			</div>
+		{{/each}}
+	{{else}}
+		<p>You have no job postings.</p>
+	{{/if}}
 </main>

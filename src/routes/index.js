@@ -21,4 +21,12 @@ router.get("/", (req, res) => {
     });
 });
 
+// If a route is not found, render 404
+router.use((req, res) => {
+	return res.status(404).render("404", {
+        title: "Page not found",
+        tagline: "The requested page was not found",
+    });
+});
+
 module.exports = router;

@@ -59,8 +59,6 @@ jobRouter.get("/:url", async (req, res) => {
 			url: req.params.url
 		}).lean();
 		
-		console.log(`Job: `, job);
-		
 		if(!job) {
 			return res.status(404).redirect("/404");
 		}
