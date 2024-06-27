@@ -19,4 +19,24 @@ editRouter.get("/", async (req, res) => {
 	}
 });
 
+editRouter.post("/", async (req, res) => {
+	try {
+        const user = await User.findById(req.user._id);
+		
+        user.name = req.body.name;
+		user.email = req.body.email;
+		
+		if(req.body.password) {
+			user.password = req.body.password;
+		}
+		
+		await user.save();
+		
+        return res.redirect("/user/admin");
+    } catch(err) {
+        console.error(err);
+        return res.redirect("500");
+    }
+});
+
 module.exports = editRouter;
