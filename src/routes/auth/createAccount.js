@@ -24,6 +24,8 @@ createAccount.get("/", function(req, res) {
 
 /**
  * Create account route
+ * 
+ * This is to be used as a REST API, so it doesn't uses any redirects or html.
  */
 createAccount.post(
 	"/",

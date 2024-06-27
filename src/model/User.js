@@ -40,6 +40,7 @@ userSchema.pre("save", function(next) {
     });
 });
 
+// Check if the E-Mail is taken
 userSchema.post("save", function(err, doc, next) {
 	try {
 		if(err.name === "MongoError" && err.code === 11000) {
@@ -51,6 +52,13 @@ userSchema.post("save", function(err, doc, next) {
 		return next(err);
 	}
 });
+
+// Authenticate the user
+userSchema.methods = {
+	validatePassword: function (password) {
+		return bcrypt.compareSync(password, this.password);
+	}
+};
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
