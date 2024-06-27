@@ -6,9 +6,9 @@ const validatePassword = require("../../../lib/auth/validatePassword");
 const loginRouter = express.Router();
 
 /**
- * Have to manually implement login for the nextjs frontend
+ * Validate and login a user
  */
-loginRouter.post("/", async function(req, res) {
+async function validateAndLogin(req, res) {
 	try {
 		console.log(`[POST] /rest/auth/login`);
 		
@@ -43,16 +43,17 @@ loginRouter.post("/", async function(req, res) {
 		// Remove password
 		delete user.password;
 		
-		const authToken = generateJwtToken(user);
+		const token = generateJwtToken(user);
 		
 		return res
-			.cookie("authToken", authToken, {
+			.cookie("token", token, {
 				httpOnly: false,
 			}).send({
 				messages: [{
 					message: "Logged in",
 					error: false,
 				}],
+				token,
 			});
 	} catch(err) {
 		console.error(err);
@@ -63,6 +64,11 @@ loginRouter.post("/", async function(req, res) {
             }],
 		});
 	}
-});
+}
+
+/**
+ * Have to manually implement login for the nextjs frontend
+ */
+loginRouter.post("/", validateAndLogin);
 
 module.exports = loginRouter;
