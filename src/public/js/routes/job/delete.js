@@ -45,6 +45,12 @@ function onDeleteJob(event) {
 						text: "The job post has been deleted.",
 						icon: "success"
 					});
+					
+					// Delete element
+					const jobListing = event.target.parentElement.parentElement.parentElement;
+					const jobPost = event.target.parentElement.parentElement;
+					
+					jobListing.removeChild(jobPost);
 				} else {
 					Swal.fire({
 						title: "Error",

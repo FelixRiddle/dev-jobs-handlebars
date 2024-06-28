@@ -7,33 +7,35 @@
 	
 	<h2>Your job posts</h2>
 	
-	{{#if jobs}}
-		{{#each jobs}}
-			<div class="vacante panel-administracion">
-				<div class="caja">
-					<h3>
-						{{company}}
-					</h3>
-					<p class="puesto">
-						{{title}}
-					</p>
+	<div class="panel-administracion">
+		{{#if jobs}}
+			{{#each jobs}}
+				<div class="vacante">
+					<div class="caja">
+						<h3>
+							{{company}}
+						</h3>
+						<p class="puesto">
+							{{title}}
+						</p>
+					</div>
+					<div class="centrar-vertical caja">
+						<a href="/candidates/{{_id}}" class="btn btn-amarillo">Candidates</a>
+					</div>
+					<div class="centrar-vertical caja">
+						{{!-- Url should've been first? --}}
+						{{!-- <a href="/job/{{url}}/edit" class="btn btn-verde">Edit</a> --}}
+						<a href="/job/edit/{{url}}" class="btn btn-verde">Edit</a>
+					</div>
+					<div class="centrar-vertical caja">
+						<a href="#" data-delete="{{_id}}" class="btn btn-rojo">Delete</a>
+					</div>
 				</div>
-				<div class="centrar-vertical caja">
-					<a href="/candidates/{{_id}}" class="btn btn-amarillo">Candidates</a>
-				</div>
-				<div class="centrar-vertical caja">
-					{{!-- Url should've been first? --}}
-					{{!-- <a href="/job/{{url}}/edit" class="btn btn-verde">Edit</a> --}}
-					<a href="/job/edit/{{url}}" class="btn btn-verde">Edit</a>
-				</div>
-				<div class="centrar-vertical caja">
-					<a href="#" data-delete="{{_id}}" class="btn btn-rojo">Delete</a>
-				</div>
-			</div>
-		{{/each}}
-	{{else}}
-		<p>You have no job postings.</p>
-	{{/if}}
+			{{/each}}
+		{{else}}
+			<p>You have no job postings.</p>
+		{{/if}}
+	</div>
 	
 	{{!-- Script --}}
 	<script src="/js/routes/job/delete.js"></script>
