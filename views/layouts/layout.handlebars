@@ -21,7 +21,7 @@
 		{{!-- Website info --}}
 		<div class="website-info">
 			<h1 class="website-name">
-				<Link href="/">devJobs</Link>
+				<a href="/">devJobs</a>
 			</h1>
 			
 			{{!-- Have to add this because I confused nextjs frontend with handlebars once --}}
@@ -35,6 +35,29 @@
 			</div>
 		</div>
         
+		{{!-- If the user is given, then it's logged in --}}
+		{{#if user}}
+			<div class="user-navbar">
+				<a href="/user/profile/edit" class="user-navbar-element">Hello {{user.name}}!</a>
+				<a href="/user/admin" class="user-navbar-element">Admin panel</a>
+				<a
+					href="/user/logout"
+					class="user-navbar-element"
+				>Logout</a>
+			</div>
+		{{else}}
+			<div class="user-navbar">
+				<a
+					href="/auth/create-account"
+					class="user-navbar-element"
+				>Register</a>
+				<a
+					href="/auth/login"
+					class="user-navbar-element"
+				>Login</a>
+			</div>
+		{{/if}}
+		
         {{#if bar}}
             <div class="buscador">
                 <form action="#">
@@ -43,14 +66,6 @@
                 </form>
             </div>
         {{/if}}
-		
-		{{#if closeSession}}
-			<div class="cerrar-session">
-				<p>Hello! {{name}}</p>
-				<a href="/user/admin">Admin panel</a>
-				<a href="/user/logout">Logout</a>
-			</div>
-		{{/if}}
     </div>
     
     <header class="site-header contenedor separador">

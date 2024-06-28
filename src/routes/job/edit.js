@@ -20,6 +20,7 @@ editRouter.get("/:url", async(req, res, next) => {
 			closeSession: true,
             name: req.user.name,
 			job,
+			user: req.user,
 		};
 		
 		return res.render("job/edit", responseObject);

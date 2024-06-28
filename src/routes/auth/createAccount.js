@@ -15,10 +15,11 @@ createAccount.get("/", function(req, res) {
 	try {
 		return res.render("auth/create-account", {
 			...createAccountMetadata,
+			user: req.user,
 		});
 	} catch(err) {
 		console.error(err);
-		return res.render("/500");
+		return res.redirect("/500");
 	}
 });
 
@@ -133,6 +134,7 @@ createAccount.post(
 				return res.render(`auth/create-account`, {
 					...createAccountMetadata,
 					messages: [...req.flash().messages],
+					user: req.user,
 				});
 			}
 			
@@ -152,6 +154,7 @@ createAccount.post(
 					messages: [
 						...req.flash().messages
 					],
+					user: req.user,
 				});
 			}
 			
@@ -167,6 +170,7 @@ createAccount.post(
 				return res.render(`auth/create-account`, {
 					...createAccountMetadata,
 					messages: [...req.flash().messages],
+					user: req.user,
 				});
 			}
 			

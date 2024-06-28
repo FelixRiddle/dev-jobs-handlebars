@@ -5,6 +5,10 @@ const loginRouter = express.Router();
 
 loginRouter.get("/", function(req, res) {
 	try {
+		if(req.user) {
+			return res.redirect("/");
+		}
+		
 		return res.render("auth/login", {
 			title: "Log in to devJobs",
 			tagline: "Login",

@@ -12,6 +12,7 @@ createRouter.get("/", (req, res) => {
         tagline: "Fill the formulary and create a new job",
 		closeSession: true,
 		name: req.user.name,
+		user: req.user,
     });
 });
 
@@ -55,6 +56,7 @@ createRouter.post(
                     name: req.user.name,
                     messages,
                     ...req.body,
+					user: req.user,
                 });
 			}
 			

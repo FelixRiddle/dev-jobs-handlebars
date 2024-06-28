@@ -6,6 +6,7 @@ const authRouter = require("./auth");
 const userRouter = require("./user");
 const { validateUserFrontend } = require("../middleware/validateUser");
 const restRouter = require("./rest");
+const internalErrorRouter = require("./500");
 
 const router = express.Router();
 
@@ -21,11 +22,14 @@ router.get("/", (req, res) => {
     });
 });
 
+// Status pages
+router.use("/500", internalErrorRouter);
 // If a route is not found, render 404
 router.use((req, res) => {
 	return res.status(404).render("404", {
         title: "Page not found",
         tagline: "The requested page was not found",
+		user: req.user,
     });
 });
 

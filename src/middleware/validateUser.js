@@ -5,12 +5,15 @@ const jwt = require("jsonwebtoken");
  */
 function validateUserFrontend(req, res, next) {
 	try {
-		if(req.isAuthenticated()) {
+		const isAuthenticated = req.isAuthenticated();
+		
+		if(!isAuthenticated) {
 			return res.redirect("/auth/login");
 		}
 		
 		return next();
 	} catch(err) {
+		console.error(err);
 		return res.redirect("500");
 	}
 }

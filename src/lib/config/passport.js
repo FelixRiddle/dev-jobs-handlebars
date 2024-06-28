@@ -8,9 +8,16 @@ passport.use(new LocalStrategy({
     passwordField: "password",
     passReqToCallback: true,
 }, async (req, email, password, done) => {
+	const debug = false;
+	
 	try {
         const user = await User.findOne({ email });
         if(!user) {
+			
+			if(debug) {
+				console.log(`User not found`);
+			}
+			
             return done(null, false, {
 				messages: [{
 					message: "Incorrect email or password",
@@ -18,7 +25,13 @@ passport.use(new LocalStrategy({
 				}]
             });
         }
+		
         if(!user.validatePassword(password)) {
+			
+			if(debug) {
+				console.log(`Invalid password`);
+			}
+			
             return done(null, false, {
 				messages: [{
 					message: "Incorrect email or password",
@@ -26,8 +39,18 @@ passport.use(new LocalStrategy({
 				}]
             });
         }
+		
+		if(debug) {
+			console.log(`User authenticated successfully`);
+		}
+		
         return done(null, user);
     } catch(err) {
+		
+		if(debug) {
+			console.error(`Authentication error: `, err);
+		}
+		
         return done(err);
     }
 }));

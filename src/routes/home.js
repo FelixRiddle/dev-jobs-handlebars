@@ -16,6 +16,7 @@ homeRouter.get("/", async (req, res, next) => {
         bar: true,
         button: true,
 		jobs,
+		user: req.user,
     });
 });
 

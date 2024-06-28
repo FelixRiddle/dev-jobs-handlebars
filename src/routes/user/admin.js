@@ -19,6 +19,7 @@ adminRouter.get("/", async function(req, res) {
 			tagline: "Create and administrate your job positions from here",
 			closeSession: true,
 			name: req.user.name,
+			user: req.user,
 			jobs,
 		});
 	} catch(err) {
