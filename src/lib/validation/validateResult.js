@@ -8,6 +8,10 @@ const { validationResult } = require("express-validator");
  * Returns undefined if there are no errors otherwise returns the error messages
  */
 function validateResult(req) {
+	if(!req) {
+		throw Errro("Express 'req' object not given");
+	}
+	
 	const result = validationResult(req);
 	let messages = undefined;
 	if (!result.isEmpty()) {
