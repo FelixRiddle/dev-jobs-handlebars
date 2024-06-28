@@ -6,11 +6,13 @@ const editRouter = require("./edit");
 const getUrl = require("../../lib/config/url");
 const { validateUserFrontend } = require("../../middleware/validateUser");
 const expandData = require("../../lib/misc/expand");
+const deleteRouter = require("./delete");
 
 const jobRouter = express.Router();
 
 jobRouter.use("/create", validateUserFrontend, createRouter);
 jobRouter.use("/edit", validateUserFrontend, editRouter);
+jobRouter.use("/delete", validateUserFrontend, deleteRouter);
 
 /**
  * This is the same as the previous endpooint

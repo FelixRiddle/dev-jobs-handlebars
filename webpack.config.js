@@ -28,6 +28,12 @@ module.exports = {
             ],
             filename: "js/routes/job/edit.js"
 		},
+		job_delete: {
+			import: [
+                `${publicRoutes}job/delete.js`
+			],
+			filename: "js/routes/job/delete.js",
+		}
 	},
     module: {
         rules: [
