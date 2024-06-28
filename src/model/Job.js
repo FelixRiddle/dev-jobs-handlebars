@@ -64,4 +64,6 @@ exports.contractTypes = [
     "apprenticeship",
     "volunteer",
 ];
-module.exports = mongoose.model("job", jobSchema);
+
+const Job = mongoose.model("Job", jobSchema);
+module.exports = Job;

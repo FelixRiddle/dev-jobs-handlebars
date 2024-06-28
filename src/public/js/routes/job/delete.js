@@ -60,7 +60,7 @@ function onDeleteJob(event) {
 				}
 			}
 		});
-	} else {
+	} else if(event.target.tagName === "A") {
 		window.location.href = event.target.href;
 	}
 }
