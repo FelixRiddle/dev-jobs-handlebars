@@ -1,6 +1,6 @@
 <main class="contenedor">
 	{{#with user}}
-		<form action="/user/profile/edit" method="POST" class="default-form">
+		<form action="/user/profile/edit" method="POST" class="default-form" enctype="multipart/form-data">
 			<div class="campo">
 				<label for="name">Nombre</label>
 				<input type="text" name="name" id="name" placeholder="Name" value="{{name}}" required />
@@ -12,6 +12,10 @@
 			<div class="campo">
 				<label for="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="Password" />
+			</div>
+			<div class="campo">
+				<label for="pfp">Profile photo</label>
+				<input type="file" name="pfp" id="pfp" placeholder="Profile photo" />
 			</div>
 			
 			<div class="campo">

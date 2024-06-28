@@ -1,12 +1,13 @@
+const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const { engine } = require("express-handlebars");
 const express = require("express");
+const flash = require("connect-flash");
+const fs = require('fs');
+const MongoStore = require("connect-mongo");
 const mongoose = require('mongoose');
 const path = require('path');
 const session = require("express-session");
-const bodyParser = require('body-parser');
-const MongoStore = require("connect-mongo");
-const flash = require("connect-flash");
 
 const helpers = require("./lib/helpers/handlebars");
 const router = require('./routes/index');
@@ -17,6 +18,15 @@ const passport = require("./lib/config/passport");
 require('dotenv').config({
     path: ".env",
 });
+
+// Create folders
+if (!fs.existsSync(path.join(process.cwd(), 'public', 'uploads'))) {
+    fs.mkdirSync(path.join(process.cwd(), 'public', 'uploads'));
+}
+
+if (!fs.existsSync(path.join(process.cwd(), 'public', 'profile'))) {
+    fs.mkdirSync(path.join(process.cwd(), 'public', 'profile'));
+}
 
 const app = express();
 

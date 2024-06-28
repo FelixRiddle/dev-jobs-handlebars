@@ -5,6 +5,7 @@ const expandData = require("../../../../lib/misc/expand");
 const { body } = require("express-validator");
 const { DEFAULT_MAX_LENGTH } = require("../../../job/create");
 const validateResult = require("../../../../lib/validation/validateResult");
+const uploadImage = require("../../../../middleware/uploadImage");
 
 const editRouter = express.Router();
 
@@ -24,6 +25,7 @@ editRouter.get("/", async (req, res) => {
 
 editRouter.post(
 	"/",
+	uploadImage,
 	// Name
 	body("name", "Name is required").escape().notEmpty(),
 	body("name", "Name is too long").isLength({ max: DEFAULT_MAX_LENGTH }),
