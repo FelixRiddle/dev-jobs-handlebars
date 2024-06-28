@@ -8,10 +8,9 @@ userRouter.use("/profile", profileRouter);
 userRouter.get("/", async (req, res) => {
 	try {
 		console.log(`[GET] /rest/user/profile`)
-		// const user = await User.findById(req.user._id).lean();
+		
 		// We've got the user already
 		const user = req.user;
-		console.log(`User: `, user);
 		
 		return res.send({
 			messages: [],
