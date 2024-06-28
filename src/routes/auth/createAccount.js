@@ -14,7 +14,7 @@ const createAccountMetadata = {
 // Auth will have to be unified with express authentication.
 createAccount.get("/", function(req, res) {
 	try {
-		if(!req.user) {
+		if(req.user) {
 			return res.redirect("/");
 		}
 		
