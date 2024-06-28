@@ -7,6 +7,8 @@ createRouter.get("/", (req, res) => {
     return res.render("job/create", {
         title: "Create a job",
         tagline: "Fill the formulary and create a new job",
+		closeSession: true,
+		name: req.user.name,
     });
 });
 

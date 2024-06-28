@@ -17,6 +17,8 @@ editRouter.get("/:url", async(req, res, next) => {
 			title: job.title,
 			tagline: job.company,
 			bar: true,
+			closeSession: true,
+            name: req.user.name,
 			job,
 		};
 		

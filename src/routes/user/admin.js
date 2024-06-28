@@ -17,8 +17,9 @@ adminRouter.get("/", async function(req, res) {
 		return res.render("user/admin", {
 			title: "Administration panel",
 			tagline: "Create and administrate your job positions from here",
+			closeSession: true,
+			name: req.user.name,
 			jobs,
-            bar: true,
 		});
 	} catch(err) {
 		return res.redirect('500');

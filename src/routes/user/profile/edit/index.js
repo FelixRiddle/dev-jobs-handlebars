@@ -11,6 +11,8 @@ editRouter.get("/", async (req, res) => {
             title: "Edit user profile",
             tagline: "Update your profile",
             bar: true,
+			closeSession: true,
+            name: req.user.name,
 			user
         });
 	} catch(err) {
