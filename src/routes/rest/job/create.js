@@ -31,12 +31,13 @@ createRouter.post(
 	// We have to escape each skill.
 	// TODO: Or something else could be, to store ids that represent skills and add those here in the backend.
     body("skills", "Skills are required").escape().notEmpty(),
+	body("skills", "Skills must be an array, which is weird, 'cause the frontend doesn't allow you to pick, you messin' around bruh?.").isArray(),
 	async (req, res) => {
 		try {
 			console.log(`[POST] /rest/job/create`);
 			
 			// Validate the data
-			const messages = validateResult();
+			const messages = validateResult(req);
 			if(messages) {
 				return res.render("job/create", {
                     title: "Create a job",
@@ -53,8 +54,6 @@ createRouter.post(
 			
 			// Update some data
 			job.author = req.user._id;
-			// Manually split the skills by commas
-			job.skills = req.body.skills.split(",");
 			
 			// Save model
 			await job.save();

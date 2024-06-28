@@ -20,7 +20,10 @@ const userSchema = mongoose.Schema({
 		trim: true,
 	},
 	token: String,
-	expires: Date
+	expires: Date,
+}, {
+	// I have had forgotten about timestamps
+	timestamps: true,
 });
 
 // Method to hash passwords

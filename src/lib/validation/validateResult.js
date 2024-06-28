@@ -9,7 +9,7 @@ const { validationResult } = require("express-validator");
  */
 function validateResult(req) {
 	if(!req) {
-		throw Errro("Express 'req' object not given");
+		throw Error("Express 'req' object not given");
 	}
 	
 	const result = validationResult(req);

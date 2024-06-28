@@ -45,6 +45,8 @@ const jobSchema = new mongoose.Schema({
         ref: "User",
 		required: "Author is required"
 	}
+}, {
+	timestamps: true,
 });
 
 jobSchema.pre('save', function(next) {

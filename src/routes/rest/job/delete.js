@@ -1,5 +1,6 @@
 const express = require('express');
 const validateJobPostingOwnership = require('../../../middleware/validateJobOwnership');
+const Job = require('../../../model/Job');
 
 const deleteRouter = express.Router();
 
@@ -13,8 +14,7 @@ deleteRouter.delete(
 		try {
 			console.log(`[DELETE] /rest/job/delete/${req.params.id}`);
 			
-			const job = req.job;
-			await job.remove();
+			await Job.findByIdAndDelete(req.params.id);
 			
 			return res.send({
 				messages: [{

@@ -53,9 +53,10 @@ function onDeleteJob(event) {
 					jobListing.removeChild(jobPost);
 				} else {
 					Swal.fire({
+						type: "error",
 						title: "Error",
 						text: `The job post couldn't be delete. Reason: ${message}`,
-						icon: "success"
+						icon: "error"
 					});
 				}
 			}
