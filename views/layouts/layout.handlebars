@@ -11,15 +11,29 @@
     
     {{!-- Styles --}}
     <link rel="stylesheet" href="/css/app.css">
+	<link rel="stylesheet" href="/css/search.css">
+	<link rel="stylesheet" href="/css/user-navbar.css">
     
     <title>devJobs | {{title}}</title>
 </head>
 <body>
-    
     <div class="nombre-sitio contenedor">
-        <h1>
-            <a href="/">devJobs</a>
-        </h1>
+		{{!-- Website info --}}
+		<div class="website-info">
+			<h1 class="website-name">
+				<Link href="/">devJobs</Link>
+			</h1>
+			
+			{{!-- Have to add this because I confused nextjs frontend with handlebars once --}}
+			<div class="website-powered-by">
+				<p>
+					Powered by 
+				</p>
+				<p class="framework-name-handlebars">
+					Handlebars
+				</p>
+			</div>
+		</div>
         
         {{#if bar}}
             <div class="buscador">

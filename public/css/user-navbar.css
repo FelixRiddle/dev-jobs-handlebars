@@ -1,0 +1,80 @@
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+	
+	/* For debugging */
+	/* border: red 1px solid; */
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+}
+
+/* The container of the website name and other things */
+.website-info {
+	padding-right: 10%;
+	
+	/* border: burlywood 1px solid; */
+}
+
+.website-name {
+	/* border: green 1px solid; */
+}
+
+/* Powered by */
+.website-powered-by {
+	color: white;
+	display: flex;
+	
+	/* border: yellow 1px solid; */
+}
+
+.website-powered-by p {
+	/* I don't where the margin was even coming from */
+	margin: 0;
+}
+
+.framework-name {
+	/* NextJS has black and white colors, I need something that I can visually detect */
+	color: cornflowerblue;
+	font-weight: bold;
+	padding-left: 3px;
+}
+
+.framework-name-handlebars {
+	color: orange;
+	font-weight: bold;
+	padding-left: 3px;
+}
+
+.site-header {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 5rem;
+}
+
+/* User navbar */
+.user-navbar-element {
+	padding-left: 1rem;
+    color: #888;
+	
+	/* border: red 1px solid; */
+}
+
+.user-navbar {
+	padding-top: 3rem;
+	padding-bottom: 2rem;
+    color: white;
+    display: flex;
+	
+	/* border: yellow 1px solid; */
+}
+
+.user-navbar img {
+	width: 80px;
+}

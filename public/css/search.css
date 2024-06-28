@@ -1,0 +1,61 @@
+/* Search */
+.search {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+	
+	/* border: green 1px solid; */
+}
+
+.search form {
+    flex:1;
+    position: relative;
+	
+	/* border: blue 1px solid; */
+}
+
+.row-container {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+	flex-direction: row;
+}
+
+@media (min-width: 1024px) {
+    .search form {
+        /* flex: 0 0 50%; */
+		padding-left: 30%;
+    }
+}
+
+.search input[type="text"] {
+    background-color: rgba(255,255,255,.1);
+    width: 100%;
+    border: none;
+    padding: .5rem 4rem .5rem 2rem;
+    height: 5rem;
+    border-radius: 1rem;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.search input[type="submit"] {
+    display: block;
+    text-indent: -9999px;
+    height: 30px;
+    width:30px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-image: url(../img/magnifyingGlass.png);
+    background-color: transparent;
+    border: none;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.search input[type="submit"]:hover {
+    cursor: pointer;
+}
