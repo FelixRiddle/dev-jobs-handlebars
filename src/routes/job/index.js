@@ -5,6 +5,7 @@ const createRouter = require("./create");
 const editRouter = require("./edit");
 const getUrl = require("../../lib/config/url");
 const { validateUserFrontend } = require("../../middleware/validateUser");
+const expandData = require("../../lib/misc/expand");
 
 const jobRouter = express.Router();
 
@@ -63,16 +64,13 @@ jobRouter.get("/:url", async (req, res) => {
 			return res.status(404).redirect("/404");
 		}
 		
-		// Debugging 101
-		// The problem was mongoose, the '.lean' fixed it.
-		const responseObject = {
+		return res.render("job/job", {
 			job,
 			title: job.title,
 			tagline: job.company,
 			bar: true,
-		};
-		
-		return res.render("job/job", responseObject);
+			...expandData(req),
+		});
 	} catch(err) {
 		console.error(err);
 		return res.send("500");

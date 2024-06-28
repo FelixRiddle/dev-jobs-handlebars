@@ -3,6 +3,7 @@ const { body } = require("express-validator");
 
 const Job = require("../../model/Job");
 const validateResult = require("../../lib/validation/validateResult");
+const expandData = require("../../lib/misc/expand");
 
 const createRouter = express.Router();
 
@@ -11,8 +12,7 @@ createRouter.get("/", (req, res) => {
         title: "Create a job",
         tagline: "Fill the formulary and create a new job",
 		closeSession: true,
-		name: req.user.name,
-		user: req.user,
+		...expandData(req),
     });
 });
 
@@ -53,10 +53,9 @@ createRouter.post(
                     title: "Create a job",
                     tagline: "Fill the formulary and create a new job",
                     closeSession: true,
-                    name: req.user.name,
+					...expandData(req),
                     messages,
                     ...req.body,
-					user: req.user,
                 });
 			}
 			

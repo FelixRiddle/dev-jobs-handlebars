@@ -1,5 +1,6 @@
 const express = require("express");
 const Job = require('../../model/Job');
+const expandData = require("../../lib/misc/expand");
 
 const editRouter = express.Router();
 
@@ -13,17 +14,14 @@ editRouter.get("/:url", async(req, res, next) => {
 			return next();
 		}
 		
-		const responseObject = {
+		return res.render("job/edit", {
 			title: job.title,
 			tagline: job.company,
 			bar: true,
 			closeSession: true,
-            name: req.user.name,
 			job,
-			user: req.user,
-		};
-		
-		return res.render("job/edit", responseObject);
+			...expandData(req),
+		});
 	} catch(err) {
 		console.error(err);
 		return res.redirect("500");

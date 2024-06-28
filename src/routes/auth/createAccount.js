@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../../model/User");
 const { body, validationResult } = require("express-validator");
 const getUrl = require("../../lib/config/url");
+const expandData = require("../../lib/misc/expand");
 
 const createAccount = express.Router();
 
@@ -13,9 +14,13 @@ const createAccountMetadata = {
 // Auth will have to be unified with express authentication.
 createAccount.get("/", function(req, res) {
 	try {
+		if(!req.user) {
+			return res.redirect("/");
+		}
+		
 		return res.render("auth/create-account", {
 			...createAccountMetadata,
-			user: req.user,
+			...expandData(req),
 		});
 	} catch(err) {
 		console.error(err);
@@ -133,8 +138,7 @@ createAccount.post(
 				}]);
 				return res.render(`auth/create-account`, {
 					...createAccountMetadata,
-					messages: [...req.flash().messages],
-					user: req.user,
+					...expandData(req),
 				});
 			}
 			
@@ -151,10 +155,7 @@ createAccount.post(
 				
 				return res.render(`auth/create-account`, {
 					...createAccountMetadata,
-					messages: [
-						...req.flash().messages
-					],
-					user: req.user,
+					...expandData(req),
 				});
 			}
 			
@@ -169,8 +170,7 @@ createAccount.post(
 				}]);
 				return res.render(`auth/create-account`, {
 					...createAccountMetadata,
-					messages: [...req.flash().messages],
-					user: req.user,
+					...expandData(req),
 				});
 			}
 			

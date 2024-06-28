@@ -1,19 +1,18 @@
 const express = require("express");
+
 const User = require("../../../../model/User");
+const expandData = require("../../../../lib/misc/expand");
 
 const editRouter = express.Router();
 
 editRouter.get("/", async (req, res) => {
 	try {
-		const user = await User.findById(req.user._id).lean();
-		
 		return res.render("user/profile/edit", {
             title: "Edit user profile",
             tagline: "Update your profile",
             bar: true,
 			closeSession: true,
-            name: req.user.name,
-			user
+			...expandData(req),
         });
 	} catch(err) {
 		console.error(err);

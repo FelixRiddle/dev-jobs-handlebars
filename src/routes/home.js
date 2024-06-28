@@ -1,5 +1,6 @@
 const express = require("express");
 const Job = require("../model/Job");
+const expandData = require("../lib/misc/expand");
 
 const homeRouter = express.Router();
 
@@ -16,9 +17,8 @@ homeRouter.get("/", async (req, res, next) => {
         bar: true,
         button: true,
 		jobs,
-		user: req.user,
+		...expandData(req),
     });
 });
 
 module.exports = homeRouter;
-

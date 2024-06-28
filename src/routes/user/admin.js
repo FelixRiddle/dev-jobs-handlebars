@@ -1,5 +1,6 @@
 const express = require("express");
 const Job = require("../../model/Job");
+const expandData = require("../../lib/misc/expand");
 
 const adminRouter = express.Router();
 
@@ -18,8 +19,7 @@ adminRouter.get("/", async function(req, res) {
 			title: "Administration panel",
 			tagline: "Create and administrate your job positions from here",
 			closeSession: true,
-			name: req.user.name,
-			user: req.user,
+			...expandData(req),
 			jobs,
 		});
 	} catch(err) {
