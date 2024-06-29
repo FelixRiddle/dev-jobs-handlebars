@@ -37,7 +37,33 @@
 </div>
 
 <div class="contenedor datos-reclutador">
-	<div class="enviar-datos"></div>
+	<div class="enviar-datos">
+		<h2>Contact Employer</h2>
+		<p>Fill the formulary, upload your resume and we will contact you soon</p>
+		
+		<form
+			method="POST"
+			action="/job/{{job.url}}"
+			class="default-form"
+			enctype="multipart/form-data"
+		>
+			<div class="campo">
+				<label for="name">Name</label>
+                <input type="text" name="name" id="name" placeholer="Name" />
+			</div>
+			<div class="campo">
+				<label for="email">E-Mail</label>
+				<input type="email" name="email" id="email" placeholder="E-Mail" />
+			</div>
+			<div class="campo">
+				<label for="resume">Upload resume(PDF)</label>
+				<input type="file" name="resume" id="resume" placeholder="Resume" />
+			</div>
+			<div class="campo">
+				<input type="submit" class="btn btn-verde" value="Send" />
+			</div>
+		</form>
+	</div>
 	
 	<div class="info-reclutador">
 		<h2>Employer information</h2>
