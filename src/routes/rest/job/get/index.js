@@ -41,7 +41,9 @@ getRouter.get("/url/:url", async(req, res) => {
 		
 		const job = await Job.findOne({
 			url
-		}).lean();
+		})
+			.populate('author')
+			.lean();
 		
 		return res.send({
 			job
