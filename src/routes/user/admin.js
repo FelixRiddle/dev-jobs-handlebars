@@ -8,7 +8,8 @@ adminRouter.get("/", async function(req, res) {
 	try {
 		const jobs = await Job.find({
 			author: req.user._id
-		}).lean();
+		})
+			.lean();
 		
 		// Debug
 		// jobs.forEach((job) => {
