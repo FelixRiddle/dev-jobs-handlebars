@@ -61,6 +61,10 @@ editRouter.post(
 				user.password = req.body.password;
 			}
 			
+			if(req.file) {
+				user.image = req.file.filename;
+			}
+			
 			await user.save();
 			
 			return res.redirect("/user/admin");

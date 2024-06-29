@@ -44,10 +44,6 @@ const jobSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
         ref: "User",
 		required: "Author is required"
-	},
-	image: {
-		// b64 encoded
-		type: String,
 	}
 }, {
 	timestamps: true,

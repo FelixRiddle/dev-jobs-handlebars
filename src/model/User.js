@@ -21,6 +21,10 @@ const userSchema = mongoose.Schema({
 	},
 	token: String,
 	expires: Date,
+	image: {
+		// b64 encoded
+		type: String,
+	}
 }, {
 	// I have had forgotten about timestamps
 	timestamps: true,
