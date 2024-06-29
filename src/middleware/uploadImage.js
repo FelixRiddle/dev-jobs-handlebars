@@ -3,6 +3,9 @@ const { MulterError } = require("multer");
 const shortid = require("shortid");
 
 const upload = multer({
+	limits: {
+		fileSize: 1024 * 1024, // 1MB limit
+	},
 	storage: multer.diskStorage({
 		destination: function(req, file, cb) {
             cb(null, `${process.cwd()}/public/uploads/profile`);
@@ -24,9 +27,6 @@ const upload = multer({
                 message: "Only images are allowed."
             }));
         }
-	},
-	limits: {
-		fileSize: 1024 * 1024, // 1MB limit
 	}
 }).single("pfp");
 
@@ -35,12 +35,33 @@ const upload = multer({
  */
 function uploadImage(req, res, next) {
 	upload(req, res, function(err) {
-		if(err instanceof MulterError) {
+		if(err) {
+			if(err instanceof MulterError) {
+				if(err.code === "LIMIT_FILE_SIZE") {
+					req.flash('messages', [{
+						message: "File size is too large. Please upload a file smaller than 1MB.",
+                        error: true,
+					}]);
+				} else {
+					req.flash("messages", [{
+                        message: err.message,
+                        error: true,
+                    }]);
+				}
+				
+				return next();
+			} else {
+				req.flash("messages", [{
+					message: err.message,
+                    error: true,
+				}]);
+			}
+				
+			return res.redirect("/user/admin");
+		} else {
 			return next();
 		}
 	});
-	
-	next();
 }
 
 module.exports = uploadImage;
