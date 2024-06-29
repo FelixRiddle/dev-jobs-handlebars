@@ -115,7 +115,7 @@ createAccount.post(
  */
 createAccount.post(
 	"/redirect",
-	// Now express validator automatically sanitizes data
+	// '.escape()' sanitizes data
 	body("name", "Name is required").escape().notEmpty(),
 	body("email", "Email is required").escape().notEmpty(),
 	body("email", "The given E-Mail is incorrect").isEmail(),
@@ -130,15 +130,22 @@ createAccount.post(
 		try {
 			console.log(`[POST] /auth/create-account/redirect`);
 			
+			const givenData = req.body;
+			
 			// Validate password here because I don't know how to with express validator
-			if(req.body.password !== req.body.confirmPassword) {
+			if(givenData.password !== givenData.confirmPassword) {
+				const message = "Passwords don't match";
+				
 				req.flash("messages", [{
-					message: "Passwords don't match",
+					message,
 					error: true,
 				}]);
+				
+				const data = expandData(req);
 				return res.render(`auth/create-account`, {
 					...createAccountMetadata,
-					...expandData(req),
+					...data,
+					previousData: givenData,
 				});
 			}
 			
@@ -156,6 +163,7 @@ createAccount.post(
 				return res.render(`auth/create-account`, {
 					...createAccountMetadata,
 					...expandData(req),
+					previousData: givenData,
 				});
 			}
 			
@@ -171,13 +179,14 @@ createAccount.post(
 				return res.render(`auth/create-account`, {
 					...createAccountMetadata,
 					...expandData(req),
+					previousData: givenData,
 				});
 			}
 			
-			return res.redirect(`${url}auth/login`);
+			return res.redirect(`/auth/login`);
 		} catch(err) {
 			console.error(err);
-			return res.redirect(`${url}/500`);
+			return res.redirect(`/500`);
 		}
 	}
 );

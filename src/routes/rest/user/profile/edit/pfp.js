@@ -1,7 +1,7 @@
 const express = require("express");
 
-const uploadImage = require("../../../../../middleware/uploadImage");
 const User = require("../../../../../model/User");
+const uploadImageRest = require("../../../../../middleware/upload/uploadImageRest");
 
 const profilePictureRouter = express.Router();
 
@@ -18,7 +18,7 @@ const profilePictureRouter = express.Router();
  */
 profilePictureRouter.post(
 	"/",
-	uploadImage,
+	uploadImageRest,
 	async function (req, res) {
 		try {
 			console.log(`[POST] /rest/user/profile/edit/pfp`);
