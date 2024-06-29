@@ -7,6 +7,7 @@ const userRouter = require("./user");
 const { validateUserFrontend } = require("../middleware/validateUser");
 const restRouter = require("./rest");
 const internalErrorRouter = require("./500");
+const expandData = require("../lib/misc/expand");
 
 const router = express.Router();
 
@@ -29,7 +30,7 @@ router.use((req, res) => {
 	return res.status(404).render("404", {
         title: "Page not found",
         tagline: "The requested page was not found",
-		user: req.user,
+		...expandData(req),
     });
 });
 

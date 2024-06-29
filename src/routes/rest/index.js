@@ -10,4 +10,14 @@ restRouter.use("/auth", authRouter);
 restRouter.use('/job', jobRouter);
 restRouter.use("/user", validateUser, userRouter);
 
+// Custom REST API 404 message
+restRouter.use((req, res) => {
+    return res.status(404).json({
+		messages: [{
+			error: true,
+			message: "The requested endpoint does not exist."
+		}]
+    });
+});
+
 module.exports = restRouter;

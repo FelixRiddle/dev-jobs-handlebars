@@ -8,9 +8,11 @@ const { validateUserFrontend } = require("../../middleware/validateUser");
 const expandData = require("../../lib/misc/expand");
 const deleteRouter = require("./delete");
 const applyRouter = require("./apply");
+const candidatesRoute = require("./candidates");
 
 const jobRouter = express.Router();
 
+jobRouter.use("/candidates", validateUserFrontend, candidatesRoute);
 jobRouter.use("/apply", validateUserFrontend, applyRouter);
 jobRouter.use("/create", validateUserFrontend, createRouter);
 jobRouter.use("/edit", validateUserFrontend, editRouter);

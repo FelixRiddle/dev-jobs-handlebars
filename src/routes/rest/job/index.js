@@ -9,6 +9,7 @@ const applyRouter = require('./apply');
 
 const jobRouter = express.Router();
 
+jobRouter.use("/candidates", validateUser, );
 jobRouter.use("/apply", validateUser, applyRouter);
 jobRouter.use("/delete", validateUser, deleteRouter);
 jobRouter.use("/edit", validateUser, editRouter);

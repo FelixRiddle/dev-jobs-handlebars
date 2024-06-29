@@ -19,6 +19,11 @@ applyRouter.post(
 				return next();
 			}
 			
+			if(!req.file) {
+				console.log(`Error: The user didn't upload a file`);
+				return next();
+			}
+			
 			const newCandidate = {
 				name: req.body.name,
 				email: req.body.email,
