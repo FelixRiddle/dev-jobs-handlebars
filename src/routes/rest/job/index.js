@@ -5,9 +5,11 @@ const Job = require("../../../model/Job");
 const editRouter = require('./edit');
 const { validateUser } = require('../../../middleware/validateUser');
 const deleteRouter = require('./delete');
+const applyRouter = require('./apply');
 
 const jobRouter = express.Router();
 
+jobRouter.use("/apply", validateUser, applyRouter);
 jobRouter.use("/delete", validateUser, deleteRouter);
 jobRouter.use("/edit", validateUser, editRouter);
 jobRouter.use("/create", validateUser, createRouter);

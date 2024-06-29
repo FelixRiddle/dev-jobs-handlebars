@@ -24,8 +24,13 @@ if (!fs.existsSync(path.join(process.cwd(), 'public', 'uploads'))) {
     fs.mkdirSync(path.join(process.cwd(), 'public', 'uploads'));
 }
 
-if (!fs.existsSync(path.join(process.cwd(), 'public', 'profile'))) {
-    fs.mkdirSync(path.join(process.cwd(), 'public', 'profile'));
+const uploadsPath = "public/uploads";
+if (!fs.existsSync(path.join(process.cwd(), uploadsPath, 'profile'))) {
+    fs.mkdirSync(path.join(process.cwd(), uploadsPath, 'profile'));
+}
+
+if(!fs.existsSync(path.join(process.cwd(), uploadsPath, 'resume'))) {
+	fs.mkdirSync(path.join(process.cwd(), uploadsPath, 'resume'));
 }
 
 const app = express();
