@@ -5,11 +5,13 @@ const { MulterError } = require("multer");
  * 
  * Local function to not repeat code twice
  */
-function multerShowUserError(req, next) {
+function multerShowUserError(err, req) {
 	if(err instanceof MulterError) {
 		if(err.code === "LIMIT_FILE_SIZE") {
+			const message = "File size is too large. Please upload a file smaller than 1MB.";
+			
 			req.flash('messages', [{
-				message: "File size is too large. Please upload a file smaller than 1MB.",
+				message,
 				error: true,
 			}]);
 		} else {
@@ -18,8 +20,6 @@ function multerShowUserError(req, next) {
 				error: true,
 			}]);
 		}
-		
-		return next();
 	} else {
 		req.flash("messages", [{
 			message: err.message,

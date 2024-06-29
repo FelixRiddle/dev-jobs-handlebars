@@ -6,7 +6,6 @@ const validateResult = require("../../../../../lib/validation/validateResult");
 const expandData = require("../../../../../lib/misc/expand");
 const { DEFAULT_MAX_LENGTH } = require("../../../../job/create");
 const profilePictureRouter = require("./pfp");
-const uploadImageRest = require("../../../../../middleware/upload/uploadImageRest");
 
 const editRouter = express.Router();
 
@@ -14,7 +13,6 @@ editRouter.use("/pfp", profilePictureRouter);
 
 editRouter.post(
 	"/",
-	uploadImageRest,
 	// Name
 	body("name", "Name is required").escape().notEmpty(),
 	body("name", "Name is too long").isLength({ max: DEFAULT_MAX_LENGTH }),
@@ -24,6 +22,8 @@ editRouter.post(
 	body("email", "Email is too long").isLength({ max: DEFAULT_MAX_LENGTH }),
 	async (req, res) => {
 		try {
+			console.log(`[POST] /user/profile/edit`);
+			
 			// Validate the data
 			const messages = validateResult(req);
 			if(messages) {

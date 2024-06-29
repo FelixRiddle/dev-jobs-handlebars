@@ -8,8 +8,11 @@ const multerUploadDriver = require("../../lib/multer/multerUploadDriver");
 function uploadImageRest(req, res, next) {
 	multerUploadDriver(req, res, function(err) {
 		if(err) {
-			multerShowUserError();
-				
+			multerShowUserError(err, req);
+			
+			console.log(`Error`);
+			console.error(err);
+			
 			return res.send({
 				...expandData(req),
 			});

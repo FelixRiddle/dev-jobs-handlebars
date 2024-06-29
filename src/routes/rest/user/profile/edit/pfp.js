@@ -23,6 +23,8 @@ profilePictureRouter.post(
 		try {
 			console.log(`[POST] /rest/user/profile/edit/pfp`);
 			
+			console.log(`Image given: `, req.file);
+			
 			if(!req.file) {
 				console.warn("No image given");
 				return res
