@@ -13,7 +13,21 @@ const upload = multer({
 			
 			cb(null, filename);
         }
-	})
+	}),
+	// Only allow images
+	fileFilter: function(req, file, cb) {
+		if(file.mimetype.startsWith("image/")) {
+            cb(null, true);
+        } else {
+            cb(new MulterError({
+                code: "LIMIT_FILE_TYPE",
+                message: "Only images are allowed."
+            }));
+        }
+	},
+	limits: {
+		fileSize: 1024 * 1024, // 1MB limit
+	}
 }).single("pfp");
 
 /**
