@@ -37,7 +37,8 @@ jobRouter.post("/edit_alt/redirect/:url", validateUserFrontend, async(req, res, 
         }, updatedJob, {
             new: true,
 			runValidators: true,
-        }).lean();
+        })
+			.lean();
 		
 		const newUrl = `${url}`;
 		console.log(`Redirect to: `, newUrl);
@@ -60,7 +61,9 @@ jobRouter.get("/:url", async (req, res) => {
 		console.log(`[GET] /job/${req.params.url}`);
 		const job = await Job.findOne({
 			url: req.params.url
-		}).lean();
+		})
+			.populate('author')
+			.lean();
 		
 		if(!job) {
 			return res.status(404).redirect("/404");
