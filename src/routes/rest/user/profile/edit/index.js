@@ -1,14 +1,20 @@
 const express = require("express");
+const { body } = require("express-validator");
+
 const User = require("../../../../../model/User");
 const validateResult = require("../../../../../lib/validation/validateResult");
 const expandData = require("../../../../../lib/misc/expand");
-const { body } = require("express-validator");
 const { DEFAULT_MAX_LENGTH } = require("../../../../job/create");
+const uploadImage = require("../../../../../middleware/uploadImage");
+const profilePictureRouter = require("./pfp");
 
 const editRouter = express.Router();
 
+editRouter.use("/pfp", profilePictureRouter);
+
 editRouter.post(
 	"/",
+	uploadImage,
 	// Name
 	body("name", "Name is required").escape().notEmpty(),
 	body("name", "Name is too long").isLength({ max: DEFAULT_MAX_LENGTH }),
@@ -36,6 +42,10 @@ editRouter.post(
 				user.password = req.body.password;
 			}
 			
+			if(req.file) {
+				user.image = req.file.filename;
+			}
+			
 			await user.save();
 			
 			return res.send({
@@ -57,6 +67,5 @@ editRouter.post(
 		}
 	}
 );
-
 
 module.exports = editRouter;
