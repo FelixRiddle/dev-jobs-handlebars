@@ -7,9 +7,11 @@ const getUrl = require("../../lib/config/url");
 const { validateUserFrontend } = require("../../middleware/validateUser");
 const expandData = require("../../lib/misc/expand");
 const deleteRouter = require("./delete");
+const applyRouter = require("./apply");
 
 const jobRouter = express.Router();
 
+jobRouter.use("/apply", validateUserFrontend, applyRouter);
 jobRouter.use("/create", validateUserFrontend, createRouter);
 jobRouter.use("/edit", validateUserFrontend, editRouter);
 jobRouter.use("/delete", validateUserFrontend, deleteRouter);
