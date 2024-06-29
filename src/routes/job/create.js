@@ -47,7 +47,7 @@ createRouter.post(
 			console.log(`[POST] /job/create`);
 			
 			// Validate the data
-			const messages = validateResult();
+			const messages = validateResult(req);
 			if(messages) {
 				return res.render("job/create", {
                     title: "Create a job",
