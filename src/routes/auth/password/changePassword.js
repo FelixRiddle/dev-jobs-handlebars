@@ -1,15 +1,12 @@
 const express = require("express");
-const validateTokenRouter = require("./validate");
-const { internalErrorMessage } = require("../../../../lib/messages");
-const User = require("../../../../model/User");
 
-const createPasswordRouter = express.Router();
+const User = require("../../../model/User");
 
-createPasswordRouter.use("/validate", validateTokenRouter);
+const changePasswordRouter = express.Router();
 
-createPasswordRouter.post("/", async (req, res) => {
+changePasswordRouter.post("/", async (req, res) => {
 	try {
-		console.log(`[${req.method}] ${req.path}`);
+		console.log(`[${req.method}] /auth/password/change-password`);
 		
 		const {
 			token, password, confirmPassword
@@ -60,5 +57,4 @@ createPasswordRouter.post("/", async (req, res) => {
 	}
 });
 
-module.exports = createPasswordRouter;
-
+module.exports = changePasswordRouter;
