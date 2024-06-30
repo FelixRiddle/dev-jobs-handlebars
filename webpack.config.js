@@ -78,10 +78,10 @@ module.exports = {
         assetModuleFilename: '[name][ext]'
     },
     plugins: [
-        new CopyPlugin({
-            patterns: [
-                { from: "src/public/image", to: "image" }
-            ]
-        })
+        // new CopyPlugin({
+        //     patterns: [
+        //         { from: "src/public/image", to: "image" }
+        //     ]
+        // })
     ]
 };
