@@ -2,6 +2,7 @@ const express = require('express');
 const expandData = require('../../lib/misc/expand');
 const User = require('../../model/User');
 const crypto = require("crypto");
+const sendMail = require('../../lib/helpers/email');
 
 const resetPasswordRouter = express.Router();
 
@@ -41,8 +42,18 @@ resetPasswordRouter.post("/", async (req, res) => {
 		
 		await user.save();
 		
-		// TODO: 
+		// Reset password magic link
 		const magicLink = `http://${req.headers.host}/reset-password/token/${user.token}`;
+		
+		// Send mail
+		await sendMail({
+			email: user.email,
+			subject: "Reset password",
+			file: "reset",
+			context: {
+				magicLink,
+			}
+		});
 		
 		req.flash('messages', [{
 			message: "We've sent you an E-Mail with instructions",
