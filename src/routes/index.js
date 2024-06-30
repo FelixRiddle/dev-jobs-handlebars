@@ -27,6 +27,9 @@ router.get("/", (req, res) => {
 router.use("/500", internalErrorRouter);
 // If a route is not found, render 404
 router.use((req, res) => {
+	console.log(`[${req.method}] ${req.path}`);
+	console.log(`Status 404: Not found`);
+	
 	return res.status(404).render("404", {
         title: "Page not found",
         tagline: "The requested page was not found",
