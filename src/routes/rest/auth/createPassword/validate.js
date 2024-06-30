@@ -9,7 +9,7 @@ const validateTokenRouter = express.Router();
 validateTokenRouter.post("/:token", async (req, res) => {
 	try {
 		const token = req.params.token;
-		console.log(`[GET] /auth/reset-password/token/${token}`);
+		console.log(`[${req.method}] ${req.path}/${token}`);
 		
 		const user = await User.findOne({
 			token,

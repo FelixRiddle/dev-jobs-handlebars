@@ -9,6 +9,8 @@ createPasswordRouter.use("/validate", validateTokenRouter);
 
 createPasswordRouter.post("/", async (req, res) => {
 	try {
+		console.log(`[${req.method}] ${req.path}`);
+		
 		const {
 			token, password, confirmPassword
 		} = req.body;

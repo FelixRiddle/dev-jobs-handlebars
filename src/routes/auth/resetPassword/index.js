@@ -1,5 +1,5 @@
 const express = require('express');
-const crypto = require("crypto");
+const { v4: uuidv4 } = require("uuid");
 
 const User = require("../../../model/User");
 const expandData = require("../../../lib/misc/expand");
@@ -42,7 +42,8 @@ resetPasswordRouter.post("/", async (req, res) => {
 			});
 		}
 		
-		user.token = crypto.randomBytes(20).toString("hex");
+		// Some bytes are slashes
+		user.token = uuidv4();
 		user.expires = Date.now() + 3_600_000;
 		
 		await user.save();
@@ -61,14 +62,10 @@ resetPasswordRouter.post("/", async (req, res) => {
 			}
 		});
 		
-		console.log(`Email sent`);
-		
 		req.flash('messages', [{
 			message: "We've sent you an E-Mail with instructions",
 			error: false,
 		}]);
-		
-		console.log(`Redirect to login`);
 		
 		return res.redirect('/auth/login');
 	} catch(err) {

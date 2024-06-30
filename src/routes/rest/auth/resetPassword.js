@@ -1,13 +1,16 @@
 const express = require('express');
-const crypto = require("crypto");
+const { v4: uuidv4 } = require("uuid");
+
+const sendMail = require("../../../lib/helpers/email")
 const User = require('../../../model/User');
 const expandData = require('../../../lib/misc/expand');
+const { internalErrorMessage } = require('../../../lib/messages');
 
 const resetPasswordRouter = express.Router();
 
 resetPasswordRouter.post("/", async (req, res) => {
 	try {
-		console.log(`[POST] /auth/reset-password`);
+		console.log(`[${req.method}] `);
 		
 		const user = await User.findOne({
 			email: req.body.email,
@@ -23,13 +26,24 @@ resetPasswordRouter.post("/", async (req, res) => {
 			});
 		}
 		
-		user.token = crypto.randomBytes(20).toString("hex");
+		user.token = uuidv4();
 		user.expires = Date.now() + 3_600_000;
 		
 		await user.save();
 		
-		// TODO: 
+		// Reset password magic link
 		const magicLink = `http://${req.headers.host}/reset-password/token/${user.token}`;
+		
+		// Send mail
+		await sendMail({
+			email: user.email,
+			subject: "Reset password",
+			file: "reset",
+			message: "Click the link to reset the password",
+			context: {
+				magicLink,
+			}
+		});
 		
 		req.flash('messages', [{
 			message: "We've sent you an E-Mail with instructions",
@@ -41,6 +55,8 @@ resetPasswordRouter.post("/", async (req, res) => {
 		});
 	} catch(err) {
 		console.error(err);
+		req.flash('messages', [internalErrorMessage]);
+		
 		return res.status(500).send({
             ...expandData(req),
         });
