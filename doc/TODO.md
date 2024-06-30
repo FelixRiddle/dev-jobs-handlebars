@@ -1,5 +1,5 @@
 # TODO list
 
-- [ ] Fix passport
-
-<!-- Rather finish the course and at the end fix everything -->
+- [ ] Have support for good roots stack
+	- [ ] Authentication
+	- [ ] Jobs SQL operations
