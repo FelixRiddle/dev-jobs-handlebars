@@ -1,8 +1,9 @@
 const express = require('express');
-const expandData = require('../../lib/misc/expand');
-const User = require('../../model/User');
 const crypto = require("crypto");
-const sendMail = require('../../lib/helpers/email');
+
+const User = require("../../../model/User");
+const expandData = require("../../../lib/misc/expand");
+const sendMail = require("../../../lib/helpers/email");
 
 const resetPasswordRouter = express.Router();
 
@@ -31,6 +32,10 @@ resetPasswordRouter.post("/", async (req, res) => {
 				message: "No user found with that email",
                 error: true,
 			}]);
+			
+			console.log(`User not found`);
+			console.log(`Render reset password`);
+			
 			return res.render("auth/reset-password", {
 				...metadata,
 				...expandData(req),
@@ -50,19 +55,22 @@ resetPasswordRouter.post("/", async (req, res) => {
 			email: user.email,
 			subject: "Reset password",
 			file: "reset",
+			message: "Click the link to reset the password",
 			context: {
 				magicLink,
 			}
 		});
+		
+		console.log(`Email sent`);
 		
 		req.flash('messages', [{
 			message: "We've sent you an E-Mail with instructions",
 			error: false,
 		}]);
 		
-		return res.redirect(
-			'/auth/login'
-		);
+		console.log(`Redirect to login`);
+		
+		return res.redirect('/auth/login');
 	} catch(err) {
 		console.error(err);
 		return res.redirect("/500");

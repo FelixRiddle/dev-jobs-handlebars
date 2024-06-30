@@ -40,7 +40,9 @@ function sendMail(options) {
 	
 	const sendMailPromise = util.promisify(transport.sendMail, transport);
 	
-	return sendMailPromise.call(transport, emailConfiguration);
+	const sentMail = sendMailPromise.call(transport, emailConfiguration);
+	
+	return sentMail;
 }
 
 module.exports = sendMail;
