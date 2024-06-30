@@ -68,9 +68,9 @@
 		
         {{#if bar}}
             <div class="buscador">
-                <form action="#">
-                    <input type="text" class="buscar">
-                    <input type="submit" value="Buscar">
+                <form action="/search" method="POST">
+                    <input type="text" name="q" class="buscar">
+                    <input type="submit" value="Search">
                 </form>
             </div>
         {{/if}}

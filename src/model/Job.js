@@ -56,6 +56,10 @@ jobSchema.pre('save', function(next) {
 	next();
 });
 
+jobSchema.index({
+	title: "text"
+});
+
 exports.contractTypes = [
 	"full-time",
 	"part-time",
