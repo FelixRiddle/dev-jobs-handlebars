@@ -1,7 +1,5 @@
 const express = require("express");
-const Job = require("../../../model/Job");
-const expandData = require("../../../lib/misc/expand");
-
+const Job = require("../../../../model/Job");
 const candidatesRoute = express.Router();
 
 /**
